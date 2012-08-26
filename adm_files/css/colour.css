@@ -1,0 +1,131 @@
+body {
+	background:#EDE4C5 /*url(../img/body.png) repeat-x top center*/;
+}
+small {
+	color:#888
+}
+
+th, #navigation, .active, input[type=submit], input[type=button], a.button, button, .pagination a:hover, .date td a:hover, #navigation > li > ul > li > a:hover, #navigation > li > ul > li > ul {
+	background:#ff9218;
+	color:#fff!important;
+}
+
+select, textarea, input, td, #content, #foot {
+	background:#fff url(../img/gradient.png) repeat-x 0 -28px
+}
+tr {
+	background-position:0 -18px;
+}
+#content {
+	background-position:0 1px;
+}
+
+.active, th, th a, #head, #head a, #navigation a, input[type=submit], input[type=button], a.button, button {
+	color:#fff;
+}
+
+input, select, textarea, a.button, button {
+	border-color:#ddd
+}
+
+h1,h2,h3,h4,h5,h6 {
+	border-color:#ddd
+}
+
+a {
+	color:#888
+}
+a.edit {
+	background-image: url(../img/edit.png);
+}
+span.edit{
+	background-image: url(../img/edit_black.png);
+}
+a.new{
+	background-image: url(../img/new.png);
+}
+a.delete {
+	background-image: url(../img/delete.png);
+}
+a.active_status {
+	background-image: url(../img/active_status.png);
+}
+a.inactive_status {
+	background-image: url(../img/inactive_status.png);
+}
+a.save{
+	background-image: url(../img/save.png);
+}
+a.pictures{
+	background-image: url(../img/add_photos.png);
+}
+
+#head {
+	background:#FC7A07;
+}
+#navigation a:hover, #navigation > li > ul, #navigation > li > ul > li > ul > li > a:hover, input[type=submit]:hover, input[type=button]:hover, a.button:hover, button:hover {
+	background:#FC7A07
+}
+#navigation .active {
+	background:#FC7A07
+}
+
+.box,.box > .utils a {
+	background:#fff;
+	border-color:#eee
+}
+.box > h2 {
+	background:url(../img/box-h2.png) repeat-x bottom center #fff
+}
+
+.error,.success,.info,.error a,.success a,.info a {
+	color:#fff
+}
+.error {
+	background:#ff2400
+}
+.error p{
+	padding: 0px;
+	margin: 0px;
+}
+.error_input{
+	border-color: #ff2400;
+}
+.error-state{
+	background: #ff2400;
+	color: #fff;
+	font-weight: bold;
+}
+.success {
+	background:#C2EFC2
+}
+
+.ui-state-highlight {
+	background:#eee;
+	font-size:13px;
+	margin:0 0 11px 0;
+	position:relative;
+}
+
+.ui-datepicker .ui-state-highlight {
+	margin: 0px;
+	font-size: inherit;
+	font-family: inherit;
+	position: inherit;
+}
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+	padding: 0px;
+}
+
+.ui-autocomplete-loading, .ajax-loading {
+	background: white url('../img/ajax-loader.gif') right center no-repeat;
+}
+
+.ajax-success {
+	background: white url('../img/active_status.png') right center no-repeat;
+}
+
+.ajax-error {
+	background: white url('../img/inactive_status.png') right center no-repeat;
+}

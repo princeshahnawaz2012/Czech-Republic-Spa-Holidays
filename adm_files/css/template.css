@@ -1,0 +1,349 @@
+/* @charset "utf-8"; CSS Document */
+@font-face { font-family: "Optima Cyr"; src: url(/css/fonts/Optima-Cyr-Regular.ttf); }
+
+* {
+	font-family: "Optima Cyr",FreeSans,sans-serif; font-size: 13px/1.5;
+}
+
+.center {
+	text-align:center;
+}
+
+ol {
+	padding:10px;
+	margin:0;
+}
+
+caption {
+	padding:4px;
+}
+
+/* Common */
+
+#content {
+	margin-right:auto;
+	margin-left:auto;
+	width:1000px;
+}
+
+.login {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.login > div {
+	width:360px !important;
+}
+
+#content {
+	width:960px;
+	position:relative;
+	zoom:1;
+}
+
+.date td a {
+	display:inline-block;
+	padding:3px 8px;
+}
+
+.date th, .date td {
+	text-align:center;
+	padding:3px;
+}
+
+/* Box */
+
+.box {
+	font-size:13px;
+	margin:0 0 10px 0;
+	position:relative;
+	border:1px solid;
+}
+
+.box h2, .box p, .box table {
+	margin:0;
+}
+
+.box h2 {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	padding:2px 10px;
+	cursor:move;
+}
+
+.utils a {
+	position:absolute;
+	top:5px;
+	right:10px;
+	border:1px solid;
+	padding:4px 8px;
+}
+
+.box p {
+	padding:10px;
+}
+
+/* Typography */
+
+label, #navigation, .error, .success, input[type="submit"], input[type="reset"], input[type="button"], a.button, button  {
+	font-weight:bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border-bottom:1px solid;
+}
+
+#head {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+a:hover, #head a {
+	text-decoration:none;
+}
+
+a.edit, span.edit, a.save, a.new, a.delete, a.active_status, a.inactive_status, a.pictures {
+	padding-left:20px;
+	background-repeat:no-repeat;
+	background-position:left center;
+}
+a {
+	padding:4px;
+}
+
+/* Table styling */
+
+table {
+	width:100%;
+}
+
+th, td {
+	padding:7px 15px;
+	text-align:left;
+}
+
+/* Header */
+
+#head {
+	border-top-right-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright:10px;
+	border:0;
+	margin:10px auto 0 auto;
+	padding:5px 30px;
+	width:940px;
+}
+
+/* Nagivation */
+
+#navigation {
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	margin: 0 auto 10px auto;
+	padding: 10px 30px;
+	width: 940px;
+}
+
+#navigation > li {
+	display: inline-block;
+	margin: 0;
+	position: relative;
+}
+
+#navigation > li > a, #navigation > li > span {
+	display:inline-block;
+	padding:5px 10px;
+	text-decoration:none;
+}
+
+#navigation > li > ul {
+	display: none;
+	position: absolute;
+	z-index: 100;
+	left: 0px;
+	top: 100%;
+	width: 200px;
+	margin: 0px;
+	padding: 3px;
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-right-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+}
+
+#navigation > li > ul > li {
+	display: block;
+	list-style: none;
+	width: 180px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#navigation > li > ul > li > a, #navigation > li > ul > li > span {
+	display:block;
+	width: 180px;
+	padding:5px 10px;
+	text-decoration:none;
+}
+
+#navigation > li:hover > ul {
+	display: block;
+}
+
+#navigation > li > ul > li > ul {
+	display: none;
+	position: absolute;
+	z-index: 100;
+	top: 0px;
+	left: 200px;
+	width: 200px;
+	margin: 0px;
+	padding: 3px;
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-right-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+}
+
+#navigation > li > ul > li > ul > li {
+	display: block;
+	list-style: none;
+	width: 180px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#navigation > li > ul > li > ul > li > a, #navigation > li > ul > li > ul > li > span {
+	display:block;
+	width: 180px;
+	padding:5px 10px;
+	text-decoration:none;
+}
+
+#navigation > li > ul > li:hover > ul {
+	display: block;
+}
+
+/* Content */
+
+#content {
+	padding:20px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+}
+
+#foot {
+	padding:5px 30px;
+	width:940px;
+	margin:10px auto;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+}
+
+.curved, #navigation a, #navigation span, .error, .success, .box, .utils a {
+	border-bottom-left-radius:5px;
+	border-top-right-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-bottom-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+}
+
+.curved-alt, a.button, button, input, textarea, select, .box, .date td a, .utils a  {
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topleft:5px;
+	-webkit-border-bottom-right-radius:5px;
+	-webkit-border-top-left-radius:5px;
+}
+
+/* Forms */
+
+label {
+	display:block;
+	font-size:17px;
+	margin:0 0 5px;
+	position:relative;
+}
+
+small {
+	font-size:12px;
+	font-weight:normal;
+	padding-left:10px;
+}
+
+input, textarea, select, a.button, button{
+	border:1px solid;
+	font-family:inherit;
+	font-size:inherit;
+	padding:4px;
+}
+
+select {
+	padding-top:3px;
+	padding-bottom:3px;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"], a.button, button {
+	cursor:pointer;
+	width:auto !important;
+	text-decoration: none;
+	padding: 4px;
+}
+
+/* Error and Success messages */
+.error, .success {
+	padding:4px 8px;
+}
+
+/* Pagination */
+.pagination {
+	text-align:right;
+}
+.pagination a, .pagination span {
+	display:inline-block;
+	margin:0 2px;
+	padding:2px 6px;
+}
+
+.ajax-loading {
+	padding-right: 20px;
+}
+
+.hide{
+	display: none;
+}
+
+.panel{
+	padding: 8px;
+	text-align: center;
+}
+
+.master_list label
+{
+	display: inline;
+	font-family: inherit;
+	font-size: inherit;
+	padding: 4px;
+	font-weight: normal;
+}
