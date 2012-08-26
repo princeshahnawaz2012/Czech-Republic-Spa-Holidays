@@ -111,11 +111,15 @@ class Adm_trans extends Adm_Controller
 
 			$aArticleData = $this->articles_model->get_translate($sLang, array('article_id' => $nArticleId), TRUE);
 			$aOriginalData = $this->articles_model->get_translate(LANGUAGE_ABBR_DEFAULT, array('article_id' => $nArticleId), TRUE);
+			
+			$this->smarty->assign('aOriginalData', $aOriginalData);
+			
 			$nTime = time();
 			$nEditingTime = $nTime + $this->config->item('article_editing_expire');
 			if ( !empty($aArticleData) )
 			{
 				$this->articles_model->save_translate($sLang, array('editor_id' => $nUserId, 'editing_end' => $nEditingTime), $nArticleId);
+				$this->smarty->assign('aArticleData', $aArticleData);
 			}
 			else
 			{
@@ -133,25 +137,13 @@ class Adm_trans extends Adm_Controller
 					'editing_end' => $nEditingTime,
 				);
 				$this->articles_model->save_translate($sLang, $aArticleData);
+				$aArticleData['title'] = $aOriginalData['title'];
+				$aArticleData['full'] = $aOriginalData['full'];
+				$aArticleData['keywords'] = $aOriginalData['keywords'];
+				$aArticleData['description'] = $aOriginalData['description'];
+				$aArticleData['seo_link'] = $aOriginalData['seo_link'];
+				$this->smarty->assign('aArticleData', $aArticleData);
 			}
-				
-			//Копируем текст оригинала, для удобства перевода
-			$aArticleData = array(
-				'article_id' => $nArticleId,
-				'title' => $aOriginalData['title'],
-				'full' => $aOriginalData['full'],
-				'keywords' => $aOriginalData['keywords'],
-				'description' => $aOriginalData['description'],
-				'seo_link' => $aOriginalData['seo_link'],
-				'hits' => 0,
-				'time' => $nTime,
-				'author_id' => $nUserId,
-				'editor_id' => $nUserId,
-				'editing_end' => $nEditingTime,
-			);
-			$this->smarty->assign('aArticleData', $aArticleData);
-			
-			$this->smarty->assign('aOriginalData', $aOriginalData);
 
 			$this->smarty->assign('nEditingInterval', $this->config->item('article_editing_expire'));
 			$this->smarty->assign('lang_uri_abbr', $this->config->item('lang_uri_abbr'));
