@@ -1,5 +1,4 @@
 <h1>{$sSiteTitle}</h1>
-<div class="form-holder">
 {form_open()}
 	<div class="center">
 		<input type="submit" value="{vlang('Save user')}" />

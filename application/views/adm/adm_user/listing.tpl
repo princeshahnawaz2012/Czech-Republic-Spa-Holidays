@@ -47,9 +47,9 @@
 	<p>
 		<label for="art_status">Status</label>
 		<select id="art_status">
-			<option value="" {if $aFilters["status"]=='0'}selected="selected"{/if}>Act./Inact.</option>
-			<option value="2" {if $aFilters["status"]=='2'}selected="selected"{/if}>Inactive</option>
-			<option value="1" {if $aFilters["status"]=='1'}selected="selected"{/if}>Active</option>
+			<option value="{$USER_STATUS_ALL}" {if $aFilters["status"]==$USER_STATUS_ALL}selected="selected"{/if}>Act./Block.</option>
+			<option value="{$USER_STATUS_ACTIVE}" {if $aFilters["status"]==$USER_STATUS_ACTIVE}selected="selected"{/if}>Active</option>
+			<option value="{$USER_STATUS_BLOCKED}" {if $aFilters["status"]==$USER_STATUS_BLOCKED}selected="selected"{/if}>Blocked</option>
 		</select>
 		<input type="hidden" id="art_per_page" value="{$nPerPage}" />
 		<input type="hidden" id="art_order" value="{$nOrder}" />
@@ -83,13 +83,19 @@
 		<td>{$aData.role[$user.role]}</td>
 		<td>{$user.created}</td>
 		<td>{if $user.last_login}{$user.last_login|date_format:"%Y-%m-%d %H:%M:%S"}{else}Undefined{/if}</td>
-		{if $user.role==1}
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
+		{if $user.role==$USER_ROLE_SUPER_ADMIN}
+			{if $aData.user_role!=$USER_ROLE_SUPER_ADMIN}	
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			{else}
+				<td><a class="active_status" title="Super administrator is always active"></a></td>
+				<td><a class="edit" href="{$site_url}{$sEditUrl}{$user.user_id}" title="Edit super administrator's account"></a></td>
+				<td>&nbsp;</td>
+			{/if}
 		{else}
 			<td>
-				{if $user.status == 1}
+				{if $user.status == $USER_STATUS_ACTIVE}
 					<a class="active_status" href="{$site_url}{$sDeactivateUrl}{$user.user_id}" title="Block this user" onclick="return confirm('Are you sure?');"></a>
 				{else}
 					<a class="inactive_status" href="{$site_url}{$sActivateUrl}{$user.user_id}" title="Unblock this user" onclick="return confirm('Are you sure?');"></a>

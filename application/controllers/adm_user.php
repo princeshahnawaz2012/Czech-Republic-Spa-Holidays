@@ -8,6 +8,13 @@ class adm_user extends Adm_Controller
 	{
 		parent::__construct();
 		$this->load->model('users_model');
+		$this->smarty->assign('USER_STATUS_ALL', USER_STATUS_ALL);
+		$this->smarty->assign('USER_STATUS_ACTIVE', USER_STATUS_ACTIVE);
+		$this->smarty->assign('USER_STATUS_BLOCKED', USER_STATUS_BLOCKED);
+		$this->smarty->assign('USER_ROLE_SUPER_ADMIN', USER_ROLE_SUPER_ADMIN);
+		$this->smarty->assign('USER_ROLE_ADMIN', USER_ROLE_ADMIN);
+		$this->smarty->assign('USER_ROLE_MANAGER', USER_ROLE_MANAGER);
+		$this->smarty->assign('USER_ROLE_TRANSLATOR', USER_ROLE_TRANSLATOR);
 	}	
 	
 	public function index()
@@ -59,19 +66,18 @@ class adm_user extends Adm_Controller
 			if ($nRole==USER_ROLE_MANAGER)
 			{
 				$aRole = array(
-					0 => 'Select role',			
-					//USER_ROLE_SUPER_ADMIN => 'Super Administrator',
-					//USER_ROLE_ADMIN => 'Administrator',
-					USER_ROLE_MANAGER => 'Manager',
-					USER_ROLE_TRANSLATOR => 'Translator'
+					0 => '--' . vlang('select role') . '--',
+					USER_ROLE_MANAGER => vlang('Manager'),
+					USER_ROLE_TRANSLATOR => vlang('Translator'),
 				);
-			} else
+			}
+			else
 			{
 				$aRole = array(
-					0 => 'Select role',			
-					USER_ROLE_ADMIN => 'Administrator',
-					USER_ROLE_MANAGER => 'Manager',
-					USER_ROLE_TRANSLATOR => 'Translator'
+					0 => '--' . vlang('select role') . '--',		
+					USER_ROLE_ADMIN => vlang('Administrator'),
+					USER_ROLE_MANAGER => vlang('Manager'),
+					USER_ROLE_TRANSLATOR => vlang('Translator'),
 				);				
 			}
 			$aMenuPerm = $this->config->item('admin_menu');
@@ -92,19 +98,29 @@ class adm_user extends Adm_Controller
 		{
 			$aLangSelect = $this->input->post('lang');
 			$aRoleSelect = $this->input->post('perm');
-			switch ( $this->input->post('role') )
+			$nRole = $this->input->post('role');
+			switch ( $nRole )
 			{
-				case 10 : $sPerm = $aRoleSelect; break;
-				case 15 : $sPerm = $aLangSelect; break;
-				default : $sPerm=array();
+				case USER_ROLE_ADMIN :
+					$sPerm = array();
+					break;
+				case USER_ROLE_MANAGER :
+					$sPerm = $aRoleSelect;
+					break;
+				case USER_ROLE_TRANSLATOR :
+					$sPerm = $aLangSelect;
+					break;
+				default :
+					$sPerm = array();
+					$nRole = $this->session->userdata('role');
 			}
 			$sPermissions = json_encode($sPerm);
 			$aUserData = array(
 				'login' => $this->input->post('login'),
 				'fio' => $this->input->post('fio'),
 				'email' => $this->input->post('email'),
-				'password' => md5($this->input->post('pass')),
-				'role' => $this->input->post('role'),
+				'password' => md5($this->input->post('pass') . $this->config->item('password_salt')),
+				'role' => $nRole,
 				'permissions' => $sPermissions,
 				'status' => USER_STATUS_ACTIVE,
 				);	
@@ -197,12 +213,13 @@ class adm_user extends Adm_Controller
 			$aUsers[$key]['perm'] = $aPerm;
 		}
 		$aRole = array(
-			USER_ROLE_SUPER_ADMIN => 'Super Administrator',
-			USER_ROLE_ADMIN => 'Administrator',
-			USER_ROLE_MANAGER => 'Manager',
-			USER_ROLE_TRANSLATOR => 'Translator'
+			USER_ROLE_SUPER_ADMIN => vlang('Super Administrator'),
+			USER_ROLE_ADMIN => vlang('Administrator'),
+			USER_ROLE_MANAGER => vlang('Manager'),
+			USER_ROLE_TRANSLATOR => vlang('Translator'),
 		);
-		$this->smarty->assign('aData',array('users'=>$aUsers, 'role'=>$aRole));
+		$user_role = $this->session->userdata('role');
+		$this->smarty->assign('aData',array('users'=>$aUsers, 'role'=>$aRole, 'user_role' => $user_role));
 
 		$sPagination='';
 		if ( !empty($nPerPage) )
@@ -261,33 +278,43 @@ class adm_user extends Adm_Controller
 			$this->errors->set(UM_ERRORTYPE_ERROR, form_error('pass'), 'pass');
 		
 			$nRole = $this->session->userdata('role');
+			$aUser = $this->users_model->get(array('user_id'=>$nUserId),TRUE);
 			if ($nRole==USER_ROLE_MANAGER)
 			{
 				$aRole = array(
-					0 => 'Select role',	
-					USER_ROLE_MANAGER => 'Manager',
-					USER_ROLE_TRANSLATOR => 'Translator'
+					0 => '--' . vlang('select role') . '--',
+					USER_ROLE_MANAGER => vlang('Manager'),
+					USER_ROLE_TRANSLATOR => vlang('Translator'),
 				);
-			} else
+			}
+			elseif ($nRole == USER_ROLE_SUPER_ADMIN && $aUser['user_id'] == $this->session->userdata('user_id'))
 			{
 				$aRole = array(
-					0 => 'Select role',			
-					USER_ROLE_ADMIN => 'Administrator',
-					USER_ROLE_MANAGER => 'Manager',
-					USER_ROLE_TRANSLATOR => 'Translator'
+					USER_ROLE_SUPER_ADMIN => vlang('Super administrator'),
+				);
+			}
+			else
+			{
+				$aRole = array(
+					0 => '--' . vlang('select role') . '--',		
+					USER_ROLE_ADMIN => vlang('Administrator'),
+					USER_ROLE_MANAGER => vlang('Manager'),
+					USER_ROLE_TRANSLATOR => vlang('Translator'),
 				);				
 			}
 			$aRoleSelect = array();
 			$aLangSelect = array();
-			$aUser = $this->users_model->get(array('user_id'=>$nUserId),TRUE);
+			
 			if($this->input->post())
 			{
 				$aLangSelect = $this->input->post('lang');
 				$aRoleSelect = $this->input->post('perm');
-			} else if ($aUser['role'] == USER_ROLE_MANAGER)
+			}
+			else if ($aUser['role'] == USER_ROLE_MANAGER)
 			{
 				$aRoleSelect = json_decode($aUser['permissions']);
-			} else if ($aUser['role'] == USER_ROLE_TRANSLATOR)
+			}
+			else if ($aUser['role'] == USER_ROLE_TRANSLATOR)
 			{
 				$aLangSelect = json_decode($aUser['permissions']);				
 			}
@@ -309,23 +336,34 @@ class adm_user extends Adm_Controller
 		{
 			$aLangSelect = $this->input->post('lang');
 			$aRoleSelect = $this->input->post('perm');
-			switch ( $this->input->post('role') )
+			$nRole = $this->input->post('role');
+			switch ( $nRole )
 			{
-				case 10 : $sPerm = $aRoleSelect; break;
-				case 15 : $sPerm = $aLangSelect; break;
-				default : $sPerm=array();
+				case USER_ROLE_SUPER_ADMIN :
+				case USER_ROLE_ADMIN :
+					$sPerm = array();
+					break;
+				case USER_ROLE_MANAGER :
+					$sPerm = $aRoleSelect;
+					break;
+				case USER_ROLE_TRANSLATOR :
+					$sPerm = $aLangSelect;
+					break;
+				default :
+					$sPerm = array();
+					$nRole = $this->session->userdata('role');
 			}
 			$sPermissions = json_encode($sPerm);
 			$aUserData = array(
 				'fio' => $this->input->post('fio'),
 				'email' => $this->input->post('email'),
-				'role' => $this->input->post('role'),
+				'role' => $nRole,
 				'permissions' => $sPermissions,
 				'status' => USER_STATUS_ACTIVE,
 				);	
 			if ($this->input->post('pass'))
 			{
-				$aUserData['password'] = md5($this->input->post('pass'));
+				$aUserData['password'] = md5($this->input->post('pass') . $this->config->item('password_salt'));
 			}
 			$this->users_model->save($aUserData,$nUserId);
 			redirect(site_url('adm_user/listing'), 'refresh');
