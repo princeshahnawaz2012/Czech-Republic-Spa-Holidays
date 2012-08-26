@@ -1,0 +1,3 @@
+<div id="foot">
+	<i>Czech Spa Holidays.com ® is a trading name of Interservis, independent travel agency specializing in organizing health and beauty holidays in mineral springs spas around Czech Republic. We work hard to ensure that your experience with us is one of supreme excellence in quality, service and value.<br />All Rights reserved © 2012{if intval(date("Y", time())) > 2012}-{$smarty.now|date_format:"%Y"}{/if}</i>
+</div>

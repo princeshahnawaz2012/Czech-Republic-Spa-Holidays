@@ -1,0 +1,1 @@
+<h1>{$sSiteTitle}</h1>
