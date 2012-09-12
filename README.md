@@ -1,4 +1,4 @@
-CzechSpaHolidays.Com
+Czech Republic Spa Holidays
 ========
 
 Czech Republic Spa Holidays - Health Care - Beauty Treatments
