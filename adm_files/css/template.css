@@ -1,9 +1,5 @@
 /* @charset "utf-8"; CSS Document */
-@font-face { font-family: "Optima Cyr"; src: url(/css/fonts/Optima-Cyr-Regular.ttf); }
-
-* {
-	font-family: "Optima Cyr",FreeSans,sans-serif; font-size: 13px/1.5;
-}
+* {font-family: OptimaCyrRegular, Arial; font-size: 13px/1.5;}
 
 .center {
 	text-align:center;

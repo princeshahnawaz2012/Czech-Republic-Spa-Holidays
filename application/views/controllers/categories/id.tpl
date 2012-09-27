@@ -14,14 +14,14 @@
 				<div class="half_table">
 					<ul>
 						{for $i=0 to ceil($nIllnesesDataCount / 2.0)-1}
-							<li><label title="{flang($aIllnesesData[$i], 'short_desc')}"><input type="checkbox" name="illneses[]" value="{$aIllnesesData[$i].com_illnese_id}" />{flang($aIllnesesData[$i], 'title')}</label></li>
+							<li><input type="checkbox" name="illneses[]" value="{$aIllnesesData[$i].com_illnese_id}" id="illnese_{$aIllnesesData[$i].com_illnese_id}" /><label for="illnese_{$aIllnesesData[$i].com_illnese_id}" title="{flang($aIllnesesData[$i], 'short_desc')}">{flang($aIllnesesData[$i], 'title')}</label></li>
 						{/for}
 					</ul>
 				</div>
 				<div class="half_table">
 					<ul>
 						{for $i=ceil($nIllnesesDataCount / 2.0) to $nIllnesesDataCount-1}
-							<li><label title="{flang($aIllnesesData[$i], 'short_desc')}"><input type="checkbox" name="illneses[]" value="{$aIllnesesData[$i].com_illnese_id}" />{flang($aIllnesesData[$i], 'title')}</label></li>
+							<li><input type="checkbox" name="illneses[]" value="{$aIllnesesData[$i].com_illnese_id}" id="illnese_{$aIllnesesData[$i].com_illnese_id}" /><label for="illnese_{$aIllnesesData[$i].com_illnese_id}" title="{flang($aIllnesesData[$i], 'short_desc')}">{flang($aIllnesesData[$i], 'title')}</label></li>
 						{/for}
 					</ul>
 				</div>

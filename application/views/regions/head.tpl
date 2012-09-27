@@ -16,6 +16,7 @@
 var site_url="{$site_url}";
 </script>
 <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="/css/fontface.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="/css/ui-lightness/jquery-ui-1.8.20.custom.css" type="text/css" media="screen" charset="utf-8" />
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>

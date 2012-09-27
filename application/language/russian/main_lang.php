@@ -1,6 +1,6 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-$lang['Site title'] = 'Czech Republic Spa Holidays - Health Care - Beauty Treatments';
+$lang['Site title'] = 'Czech Republic Spa - Health Care - Beauty Treatments';
 $lang['Price from per person'] = 'от %1$s %2$s с человека';
 $lang['404. That\'s an error.'] = '404. That\'s an error.';
 $lang['The requested URL  was not found on this server. That\'s all we know.'] = 'The requested URL %1$s was not found on this server. That\'s all we know.';

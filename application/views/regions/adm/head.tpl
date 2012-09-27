@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="/adm_files/css/960.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="/adm_files/css/template.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="/adm_files/css/colour.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/css/fontface.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="/adm_files/css/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" charset="utf-8" />
 		<!--[if IE]><![if gte IE 6]><![endif]-->
 		<script src="/adm_files/js/jquery-1.7.2.min.js" type="text/javascript"></script>
