@@ -1,7 +1,7 @@
 $().ready(function() {
 		$('textarea.tinymce').tinymce({
 			// Location of TinyMCE script
-			script_url : '/js/tiny_mce/tiny_mce.js',
+			script_url : '/js/tiny_mce/tiny_mce_gzip.php',
 
 			// General options
 			theme : "advanced",
