@@ -27,3 +27,5 @@ $lang['Organization address'] = '21 Davidson Road, London, CR0 6DL, UK';
 $lang['Organization telephone'] = '+44 (0)20 3468 1030';
 $lang['Organization registered'] = 'Registered in England and Wales No: 7125426.';
 $lang['View details of programme'] = 'Подробнее о программе';
+$lang['We can’t wait to introduce you to our advanced online reservation system, which is currently under development and is almost finished. Meanwhile, please enquire about rates and availability by email.'] = 'We can\'t wait to introduce you to our advanced online reservation system, which is currently under development and is almost finished. Meanwhile, please enquire about rates and availability by email.';
+$lang['Check rates and book'] = 'Check rates and book';

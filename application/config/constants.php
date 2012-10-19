@@ -122,6 +122,14 @@ define('CATEGORY_SHOW_ILLNESES', 'i');
 define('COMPLEX_TREATMENT_MEDICAL', 2);
 define('COMPLEX_TREATMENT_COSMETIC', 1);
 
+define('STATION_ALL', 0);
+define('STATION_ACTIVE', 1);
+define('STATION_INACTIVE', 2);
+
+define('TRANSFER_ALL', 0);
+define('TRANSFER_ACTIVE', 1);
+define('TRANSFER_INACTIVE', 2);
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

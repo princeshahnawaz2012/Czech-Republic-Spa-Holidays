@@ -1,5 +1,5 @@
 body {
-	background:#EDE4C5 /*url(../img/body.png) repeat-x top center*/;
+	background:#EDE4C5 url('../img/body.png') repeat-x top left;
 }
 small {
 	color:#888
@@ -11,7 +11,7 @@ th, #navigation, .active, input[type=submit], input[type=button], a.button, butt
 }
 
 select, textarea, input, td, #content, #foot {
-	background:#fff url(../img/gradient.png) repeat-x 0 -28px
+	background:#fff url('../img/gradient.png') repeat-x 0 -28px
 }
 tr {
 	background-position:0 -18px;
@@ -36,28 +36,28 @@ a {
 	color:#888
 }
 a.edit {
-	background-image: url(../img/edit.png);
+	background-image: url('../img/edit.png');
 }
 span.edit{
-	background-image: url(../img/edit_black.png);
+	background-image: url('../img/edit_black.png');
 }
 a.new{
-	background-image: url(../img/new.png);
+	background-image: url('../img/new.png');
 }
 a.delete {
-	background-image: url(../img/delete.png);
+	background-image: url('../img/delete.png');
 }
 a.active_status {
-	background-image: url(../img/active_status.png);
+	background-image: url('../img/active_status.png');
 }
 a.inactive_status {
-	background-image: url(../img/inactive_status.png);
+	background-image: url('../img/inactive_status.png');
 }
 a.save{
-	background-image: url(../img/save.png);
+	background-image: url('../img/save.png');
 }
 a.pictures{
-	background-image: url(../img/add_photos.png);
+	background-image: url('../img/add_photos.png');
 }
 
 #head {
@@ -75,7 +75,7 @@ a.pictures{
 	border-color:#eee
 }
 .box > h2 {
-	background:url(../img/box-h2.png) repeat-x bottom center #fff
+	background:url('../img/box-h2.png') repeat-x bottom center #fff
 }
 
 .error,.success,.info,.error a,.success a,.info a {

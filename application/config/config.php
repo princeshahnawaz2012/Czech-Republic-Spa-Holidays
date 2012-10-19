@@ -426,6 +426,7 @@ $config['admin_menu'] = array(
 				),
 			),
 			'supplement'	=> array('name' => 'Supplements', 'link' => 'adm_supplements/supplements'),
+			'station'	=> array('name' => 'Stations', 'link' => 'adm_stations/stations'),
 		),
 	),
 	'trans'		=> array('name' => 'Translation', 'link' => 'adm_trans',
@@ -454,6 +455,7 @@ $config['admin_menu'] = array(
 					'programme'	=> array('name' => 'Programmes', 'link' => 'adm_trans/programmes'),
 				),
 			),
+			'station'	=> array('name' => 'Stations', 'link' => 'adm_trans/stations'),
 		),
 	),
 	'paypal'	=> array('name' => 'PayPal', 'link' => 'admin'),
@@ -484,13 +486,13 @@ $config['article_editing_expire'] = 66;
  * Информационная почта сайта
  * Почта, с которой отправляются Инвойсы, Чеки, форма обратной связи и тд
  */
-$config['info_email'] = 'work123@lapin.mail.ua';
+$config['info_email'] = 'alyona@czechspaholidays.com';
 
 
 /**
  * Контактный телефон организации 
  */
-$config['info_phone'] = '+ 44 20 7497 7652';
+$config['info_phone'] = '+ 44 020 3468 1030';
 
 
 /**
@@ -537,8 +539,9 @@ $config['programme_pictures_dir'] = 'images/programmes/pictures/';
 /**
  * Размеры изображений оздоровительных и лечебных программ
  */
-$config['programme_image_width'] = 290;
-$config['programme_image_height'] = 156;
+$config['min_programme_image_width'] = 290;
+$config['min_programme_image_height'] = 156;
+$config['max_programme_image_width'] = 910;
 
 /**
  * Директория хранения изображений категорий

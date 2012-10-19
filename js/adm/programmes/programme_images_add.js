@@ -69,10 +69,10 @@ var initUploadedImage = function (image_type) {
 			$('#' + image_type + '_image_block  .crop_x').text(coords.x);
 			$('#' + image_type + '_image_block  .crop_y').text(coords.y);
 		},
-		setSelect: [0,0,programme_image_width,programme_image_height],
+		setSelect: [0,0,min_programme_image_width,min_programme_image_height],
 		bgColor:     'black',
 		bgOpacity:   .9,
-		minSize: [programme_image_width, programme_image_height]
+		minSize: [min_programme_image_width, min_programme_image_height]
 	});
 }
 

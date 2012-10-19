@@ -1,22 +1,31 @@
 <div class="material">
-	<h2>{flang($aProgrammeData, 'title')} – {vlang('Spa Hotel')} {flang($aSpaData, 'title')}, {flang($aCityData, 'title')}, {flang($aRegionData, 'title')}, {flang($aCountryData, 'title')}.</h2>
+	<h2>{flang($aProgrammeData, 'title')} – {flang($aSpaData, 'title')}, {flang($aCityData, 'title')}, {flang($aRegionData, 'title')}, {flang($aCountryData, 'title')}.</h2>
 </div>
+{if $nProgrammeImagesCount > 0}
 <div id="mini_baners">
 	{for $i=0 to 2}
-	<table class="material_1" cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="m_image_1"><img src="/{$sProgrammePicturesDir}{$aProgrammeImagesData[$i].com_programme_image_id}.{$aProgrammeImagesData[$i].com_image_ext}" alt="{flang($aProgrammeImagesData[$i], 'title')}" /></td></tr>
-		<tr><td class="m_link">{flang($aProgrammeImagesData[$i], 'title')}</td></tr>
-	</table>
+		{if isset($aProgrammeImagesData[$i])}
+			<table class="material_1" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td class="m_image_1">
+						<img src="/{$sProgrammePicturesDir}{$aProgrammeImagesData[$i].com_programme_image_id}.{$aProgrammeImagesData[$i].com_image_ext}" alt="{flang($aProgrammeImagesData[$i], 'title')}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="m_link">{flang($aProgrammeImagesData[$i], 'title')}</td>
+				</tr>
+			</table>
+		{/if}
 	{/for}
 	<div class="cl"></div>
+	{if $nProgrammeImagesCount > 3}
 	<div class="mini_baners_link">
 		<strong><a href="#" onclick="toggle_more_photos(this); return false;">{vlang('See More Photos')}</a></strong>
 	</div>
-	{if $nProgrammeImagesCount > 3}
 	<div id="more_photos" class="display_none">
 		{for $i=3 to $nProgrammeImagesCount-1}
-		<table class="material_1" cellpadding="0" cellspacing="0" border="0">
-			<tr><td class="m_image_1"><img src="/{$sProgrammePicturesDir}{$aProgrammeImagesData[$i].com_programme_image_id}.{$aProgrammeImagesData[$i].com_image_ext}" alt="{flang($aProgrammeImagesData[$i], 'title')}" /></td></tr>
+		<table class="programme_photo_1" cellpadding="0" cellspacing="0" border="0">
+			<tr><td><img src="/{$sProgrammePicturesDir}{$aProgrammeImagesData[$i].com_programme_image_id}.{$aProgrammeImagesData[$i].com_image_ext}" alt="{flang($aProgrammeImagesData[$i], 'title')}" /></td></tr>
 			<tr><td class="m_link">{flang($aProgrammeImagesData[$i], 'title')}</td></tr>
 		</table>
 		{/for}
@@ -24,6 +33,7 @@
 	</div>
 	{/if}
 </div>
+{/if}
  <div class="material_block">
 	<div class="material">
 		<div class="material_left">
@@ -46,11 +56,10 @@
 				{flang($aProgrammeData, 'terms')}
 			</p>
 
-			<!--
 			<div class="buy_button">
-				<a class="bt_push" href="/"><img src="images/buy_button.gif" alt="buy" /></a>
+				<a class="main_btn_green" target="_blank" href="mailto:{$info_email}?body={vlang('We can’t wait to introduce you to our advanced online reservation system, which is currently under development and is almost finished. Meanwhile, please enquire about rates and availability by email.')}">{vlang('Check rates and book')}</a>
 			</div>
-			-->
+			
 			<div class="cl"></div>                
 
 		</div>
@@ -93,7 +102,7 @@
 					<table class="essential_pictures">
 						<tr>
 							<td>
-								<img src="/{$sEssential_infoPicturesDir}{$aEssential_infoData.com_essential_info_id}.{$aEssential_infoData.com_picture_ext}" alt="{flang($aEssential_infoData, 'title')}" title="{flang($aEssential_infoData, 'title')}. {flang($aEssential_infoData, 'short_desc')}" />
+								<img src="/{$sEssential_infoPicturesDir}{$aEssential_infoData.com_essential_info_id}.{$aEssential_infoData.com_picture_ext}" alt="{flang($aEssential_infoData, 'title')}" title="{flang($aEssential_infoData, 'short_desc')}" />
 							</td>
 						</tr>
 					</table>
@@ -196,8 +205,8 @@
 			
 		</div>
 	</div>
-<!--
-	<div class="buy_button_1"> <a class="bt_push" href="/"><img src="images/buy_button.gif" alt="buy" /></a></div>
--->
+	<div class="buy_button_1">
+		<a class="main_btn_green" target="_blank" href="mailto:{$info_email}?body={vlang('We can’t wait to introduce you to our advanced online reservation system, which is currently under development and is almost finished. Meanwhile, please enquire about rates and availability by email.')}">{vlang('Check rates and book')}</a>
+	</div>
 
  </div>

@@ -39,7 +39,20 @@ class Base_Controller extends CI_Controller
 		$this->smarty->assign('language', $this->config->item('language'));
 		$this->smarty->assign('language_abbr', $this->config->item('language_abbr'));
 		$this->smarty->assign('info_phone', $this->config->item('info_phone'));
+		$this->smarty->assign('info_email', $this->config->item('info_email'));
 		$this->lang->load('main');
+		
+		if ($this->isWindows())
+		{
+			if ($this->isWebkit())
+			{
+				$this->stylesheet('webkit-windows.css');
+			}
+			elseif ($this->isOpera())
+			{
+				$this->stylesheet('opera-windows.css');
+			}
+		}
 
 /*
         $sUrl = $this->router->class.'/'.$this->router->method;
@@ -840,6 +853,48 @@ class Base_Controller extends CI_Controller
 			}
 		}
 		return NULL;
+	}
+	
+	static function isWindows()
+	{
+		return strpos($_SERVER['HTTP_USER_AGENT'], 'Windows');
+	}
+	
+	static function isLinux()
+	{
+		return strpos($_SERVER['HTTP_USER_AGENT'], 'Linux');
+	}
+	
+	static function isMac()
+	{
+		return strpos($_SERVER['HTTP_USER_AGENT'], 'Mac OS');
+	}
+	
+	
+	
+	static function isOpera()
+	{
+		return strpos(' ' .$_SERVER['HTTP_USER_AGENT'], 'Opera');
+	}
+	
+	static function isWebkit()
+	{
+		return strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit');
+	}
+	
+	static function isFirefox()
+	{
+		return strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox');
+	}
+	
+	/**
+	 * 
+	 * @param string $sVersion such as 5.5 or 9.0
+	 * @return bool
+	 */
+	static function isMSIE($sVersion = '')
+	{
+		return strpos('MSIE' . ' ' . $sVersion, $_SERVER['HTTP_USER_AGENT']);
 	}
 
 }

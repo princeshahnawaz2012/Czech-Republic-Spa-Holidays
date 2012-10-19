@@ -1,7 +1,7 @@
 <h1>{$sSiteTitle}</h1>
-<div class="grid_3" id="common_actions">
+<div class="grid_6" id="common_actions">
 	<p>
-		<label>&nbsp;</label>
+		<label>&nbsp;<small>{vlang('1 image - 910px, 2 images - 445px, 3 images - 290px')}</small></label>
 		<a href="{$site_url}{$sAddUrl}{$aProgramme.com_programme_id}" id="image_add" title="Add a image of programme" class="button">Add image</a>
 	</p>
 </div>

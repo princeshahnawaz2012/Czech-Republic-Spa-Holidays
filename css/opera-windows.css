@@ -1,0 +1,18 @@
+#logo a
+{
+	line-height: 2px;
+	font-size: 15px;
+}
+#menu ul li a
+{
+	line-height: 6px;
+}
+#phone_number
+{
+	margin-top: 175px;
+	padding-bottom: 18px;
+}
+.main_btn_green
+{
+	line-height: 19px;
+}

@@ -102,6 +102,15 @@ class Programmes extends Base_Controller
 		$this->javascript('controllers/programmes/show_images.js');
 		$this->view();
 	}
+	
+	
+	public function illneses_filter()
+	{
+		if($this->isAjaxRequest('POST'))
+		{
+			$aProgrammes = $this->programmes_model->get_illnese_joined_with_default_lang($this->config->item('language_abbr'));
+		}
+	}
 }
 
 /* End of file programmes.php */

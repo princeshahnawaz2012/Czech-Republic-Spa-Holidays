@@ -154,8 +154,8 @@ class Adm_programmes extends Adm_Controller
 				'max_map_height' => $this->config->item('max_city_map_height'),
 				'max_flag_height' => $this->config->item('max_city_flag_height'),
 				'max_emblem_height' => $this->config->item('max_city_emblem_height'),
-				'programme_image_width' => $this->config->item('programme_image_width'),
-				'programme_image_height' => $this->config->item('programme_image_height'),
+				'min_programme_image_width' => $this->config->item('min_programme_image_width'),
+				'min_programme_image_height' => $this->config->item('min_programme_image_height'),
 				'temp_dir' => $this->config->item('temp_files_dir'),
 				'image_upload_url_begin' => $this->router->class . '/programme_upload_image/',
 				'image_crop_url_begin' => $this->router->class . '/programme_crop_image/',
@@ -163,10 +163,10 @@ class Adm_programmes extends Adm_Controller
 				'image_rotate_url_begin' => $this->router->class . '/programme_rotate_image/',
 			);
 			
-			$nPictureMaxWidth = $this->config->item('programme_image_width');
-			$nPictureMaxHeight = $this->config->item('programme_image_height');
-			$nPictureMinWidth = $this->config->item('programme_image_width');
-			$nPictureMinHeight = $this->config->item('programme_image_height');
+			$nPictureMaxWidth = $this->config->item('max_programme_image_width');
+			$nPictureMaxHeight = 0;
+			$nPictureMinWidth = $this->config->item('min_programme_image_width');
+			$nPictureMinHeight = $this->config->item('min_programme_image_height');
 			$this->smarty->assign('nPictureMaxWidth', $nPictureMaxWidth);
 			$this->smarty->assign('nPictureMaxHeight', $nPictureMaxHeight);
 			$this->smarty->assign('nPictureMinWidth', $nPictureMinWidth);
@@ -477,8 +477,8 @@ class Adm_programmes extends Adm_Controller
 				'max_map_height' => $this->config->item('max_city_map_height'),
 				'max_flag_height' => $this->config->item('max_city_flag_height'),
 				'max_emblem_height' => $this->config->item('max_city_emblem_height'),
-				'programme_image_width' => $this->config->item('programme_image_width'),
-				'programme_image_height' => $this->config->item('programme_image_height'),
+				'min_programme_image_width' => $this->config->item('min_programme_image_width'),
+				'min_programme_image_height' => $this->config->item('min_programme_image_height'),
 				'temp_dir' => $this->config->item('temp_files_dir'),
 				'image_upload_url_begin' => $this->router->class . '/programme_upload_image/',
 				'image_crop_url_begin' => $this->router->class . '/programme_crop_image/',
@@ -486,10 +486,10 @@ class Adm_programmes extends Adm_Controller
 				'image_rotate_url_begin' => $this->router->class . '/programme_rotate_image/',
 			);
 			
-			$nPictureMaxWidth = $this->config->item('programme_image_width');
-			$nPictureMaxHeight = $this->config->item('programme_image_height');
-			$nPictureMinWidth = $this->config->item('programme_image_width');
-			$nPictureMinHeight = $this->config->item('programme_image_height');
+			$nPictureMaxWidth = $this->config->item('max_programme_image_width');
+			$nPictureMaxHeight = 0;
+			$nPictureMinWidth = $this->config->item('min_programme_image_width');
+			$nPictureMinHeight = $this->config->item('min_programme_image_height');
 			$this->smarty->assign('nPictureMaxWidth', $nPictureMaxWidth);
 			$this->smarty->assign('nPictureMaxHeight', $nPictureMaxHeight);
 			$this->smarty->assign('nPictureMinWidth', $nPictureMinWidth);
@@ -669,7 +669,8 @@ class Adm_programmes extends Adm_Controller
 		if ($this->isPostMethod())
 		{
 			$sTempName = $this->input->post('temp_name');
-			$sExt = $this->upload_image('image_file', './' . $this->config->item('temp_files_dir'), $sTempName, TRUE);
+			$bOnlyZoomOut = TRUE;
+			$sExt = $this->upload_image('image_file', './' . $this->config->item('temp_files_dir'), $sTempName, TRUE, $this->config->item('max_programme_image_width'), 0, $bOnlyZoomOut);
 			if ($sExt)
 			{
 				$this->AjaxResponse(array('result' => 'ok', 'ext' => $sExt), TRUE);
@@ -813,8 +814,8 @@ class Adm_programmes extends Adm_Controller
 		$this->smarty->assign('sProgrammePictureDir', $sProgrammePictureDir);
 		
 		$aTempalteVar = array(
-			'programme_image_width' => $this->config->item('programme_image_width'),
-			'programme_image_height' => $this->config->item('programme_image_height'),
+			'min_programme_image_width' => $this->config->item('min_programme_image_width'),
+			'min_programme_image_height' => $this->config->item('min_programme_image_height'),
 			'temp_dir' => $this->config->item('temp_files_dir'),
 			'image_upload_url_begin' => $this->router->class . '/programme_upload_image/',
 			'image_crop_url_begin' => $this->router->class . '/programme_crop_image/',
@@ -822,10 +823,10 @@ class Adm_programmes extends Adm_Controller
 			'image_rotate_url_begin' => $this->router->class . '/programme_rotate_image/',
 		);
 
-		$nPictureMaxWidth = $this->config->item('programme_image_width');
-		$nPictureMaxHeight = $this->config->item('programme_image_height');
-		$nPictureMinWidth = $this->config->item('programme_image_width');
-		$nPictureMinHeight = $this->config->item('programme_image_height');
+		$nPictureMaxWidth = $this->config->item('max_programme_image_width');
+		$nPictureMaxHeight = 0;
+		$nPictureMinWidth = $this->config->item('min_programme_image_width');
+		$nPictureMinHeight = $this->config->item('min_programme_image_height');
 		$this->smarty->assign('nPictureMaxWidth', $nPictureMaxWidth);
 		$this->smarty->assign('nPictureMaxHeight', $nPictureMaxHeight);
 		$this->smarty->assign('nPictureMinWidth', $nPictureMinWidth);
@@ -915,8 +916,8 @@ class Adm_programmes extends Adm_Controller
 			$this->smarty->assign('sTempNamePicture', $sTempNamePicture);
 			
 			$aTempalteVar = array(
-				'programme_image_width' => $this->config->item('programme_image_width'),
-				'programme_image_height' => $this->config->item('programme_image_height'),
+				'min_programme_image_width' => $this->config->item('min_programme_image_width'),
+				'min_programme_image_height' => $this->config->item('min_programme_image_height'),
 				'temp_dir' => $this->config->item('temp_files_dir'),
 				'image_upload_url_begin' => $this->router->class . '/programme_upload_image/',
 				'image_crop_url_begin' => $this->router->class . '/programme_crop_image/',
@@ -924,10 +925,10 @@ class Adm_programmes extends Adm_Controller
 				'image_rotate_url_begin' => $this->router->class . '/programme_rotate_image/',
 			);
 			
-			$nPictureMaxWidth = $this->config->item('programme_image_width');
-			$nPictureMaxHeight = $this->config->item('programme_image_height');
-			$nPictureMinWidth = $this->config->item('programme_image_width');
-			$nPictureMinHeight = $this->config->item('programme_image_height');
+			$nPictureMaxWidth = $this->config->item('max_programme_image_width');
+			$nPictureMaxHeight = 0;
+			$nPictureMinWidth = $this->config->item('min_programme_image_width');
+			$nPictureMinHeight = $this->config->item('min_programme_image_height');
 			$this->smarty->assign('nPictureMaxWidth', $nPictureMaxWidth);
 			$this->smarty->assign('nPictureMaxHeight', $nPictureMaxHeight);
 			$this->smarty->assign('nPictureMinWidth', $nPictureMinWidth);
@@ -1021,8 +1022,8 @@ class Adm_programmes extends Adm_Controller
 			}
 			
 			$aTempalteVar = array(
-				'programme_image_width' => $this->config->item('programme_image_width'),
-				'programme_image_height' => $this->config->item('programme_image_height'),
+				'min_programme_image_width' => $this->config->item('min_programme_image_width'),
+				'min_programme_image_height' => $this->config->item('min_programme_image_height'),
 				'temp_dir' => $this->config->item('temp_files_dir'),
 				'image_upload_url_begin' => $this->router->class . '/programme_upload_image/',
 				'image_crop_url_begin' => $this->router->class . '/programme_crop_image/',
@@ -1030,10 +1031,10 @@ class Adm_programmes extends Adm_Controller
 				'image_rotate_url_begin' => $this->router->class . '/programme_rotate_image/',
 			);
 			
-			$nPictureMaxWidth = $this->config->item('programme_image_width');
-			$nPictureMaxHeight = $this->config->item('programme_image_height');
-			$nPictureMinWidth = $this->config->item('programme_image_width');
-			$nPictureMinHeight = $this->config->item('programme_image_height');
+			$nPictureMaxWidth = $this->config->item('max_programme_image_width');
+			$nPictureMaxHeight = 0;
+			$nPictureMinWidth = $this->config->item('min_programme_image_width');
+			$nPictureMinHeight = $this->config->item('min_programme_image_height');
 			$this->smarty->assign('nPictureMaxWidth', $nPictureMaxWidth);
 			$this->smarty->assign('nPictureMaxHeight', $nPictureMaxHeight);
 			$this->smarty->assign('nPictureMinWidth', $nPictureMinWidth);

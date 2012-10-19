@@ -8,6 +8,8 @@ class Categories extends Base_Controller
 	{
 		parent::__construct();
 		$this->load->model('categories_model');
+		$this->smarty->assign('COMPLEX_TREATMENT_COSMETIC', COMPLEX_TREATMENT_COSMETIC);
+		$this->smarty->assign('COMPLEX_TREATMENT_MEDICAL', COMPLEX_TREATMENT_MEDICAL);
 	}
 	
 	public function index()
@@ -15,8 +17,8 @@ class Categories extends Base_Controller
 		$aCategoriesData = $this->categories_model->get_joined_with_default_lang($this->config->item('language_abbr'), array('com_active' => CATEGORY_ACTIVE), FALSE, FALSE, array('com_order' => 'asc'));
 		$this->smarty->assign('aCategoriesData', $aCategoriesData);
 		$this->smarty->assign('sCategoryPicturesDir', $this->config->item('category_pictures_dir'));
-		$this->smarty->assign('CATEGORY_SHOW_SHORT_DESCRIPTION', CATEGORY_SHOW_SHORT_DESCRIPTION);
-		$this->smarty->assign('CATEGORY_SHOW_ILLNESES', CATEGORY_SHOW_ILLNESES);
+//		$this->smarty->assign('CATEGORY_SHOW_SHORT_DESCRIPTION', CATEGORY_SHOW_SHORT_DESCRIPTION);
+//		$this->smarty->assign('CATEGORY_SHOW_ILLNESES', CATEGORY_SHOW_ILLNESES);
 		
 		$this->metakeywords(vlang('Site title'));
 		$this->metadescription(vlang('Site title'));
@@ -27,7 +29,7 @@ class Categories extends Base_Controller
 	/**
 	 * Вывод категории
 	 */
-	public function id($sType = CATEGORY_SHOW_SHORT_DESCRIPTION, $nCategoryId = FALSE)
+	public function id($nCategoryId = FALSE)
 	{
 		if ($nCategoryId === FALSE)
 		{
@@ -46,9 +48,9 @@ class Categories extends Base_Controller
 			$this->not_found();
 		}
 		
-		$this->smarty->assign('sType', $sType);
-		$this->smarty->assign('CATEGORY_SHOW_SHORT_DESCRIPTION', CATEGORY_SHOW_SHORT_DESCRIPTION);
-		$this->smarty->assign('CATEGORY_SHOW_ILLNESES', CATEGORY_SHOW_ILLNESES);
+//		$this->smarty->assign('sType', $sType);
+//		$this->smarty->assign('CATEGORY_SHOW_SHORT_DESCRIPTION', CATEGORY_SHOW_SHORT_DESCRIPTION);
+//		$this->smarty->assign('CATEGORY_SHOW_ILLNESES', CATEGORY_SHOW_ILLNESES);
 
 		$this->load->model('illneses_model');
 		$aIllnesesData = $this->illneses_model->get_joined_with_default_lang($this->config->item('language_abbr'), array('com_active' => ILLNESE_ACTIVE), FALSE, FALSE, array('com_order' => 'asc'));
@@ -97,6 +99,7 @@ class Categories extends Base_Controller
 		$this->title(flang($aCategoryData, 'title'));
 		$this->metakeywords(flang($aCategoryData, 'metakeywords'));
 		$this->metadescription(flang($aCategoryData, 'metadescription'));
+		$this->javascript('controllers/categories/illneses_filter.js');
 		$this->smarty->assign('aCategoryData', $aCategoryData);
 		$this->smarty->assign('sCategoryPicturesDir', $this->config->item('category_pictures_dir'));
 		$this->view();
