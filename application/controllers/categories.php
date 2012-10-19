@@ -95,10 +95,14 @@ class Categories extends Base_Controller
 		}
 		$this->smarty->assign('aSpasTitle', $aSpasTitle);
 
-		
+		$aTemplateVar = array(
+			'nCategoryId' => $nCategoryId,
+		);
+		$this->template_var($aTemplateVar);
 		$this->title(flang($aCategoryData, 'title'));
 		$this->metakeywords(flang($aCategoryData, 'metakeywords'));
 		$this->metadescription(flang($aCategoryData, 'metadescription'));
+		$this->javascript('jquery.scrollTo-min.js');
 		$this->javascript('controllers/categories/illneses_filter.js');
 		$this->smarty->assign('aCategoryData', $aCategoryData);
 		$this->smarty->assign('sCategoryPicturesDir', $this->config->item('category_pictures_dir'));

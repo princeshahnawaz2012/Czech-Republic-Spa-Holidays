@@ -37,7 +37,10 @@
 					</div>
 					<div class="cl"></div>
 					<div class="reset_all">
-						<a  class="bt_push" href="#" id="reset_category_filter"><img src="/images/reset_all_button.gif" alt="{vlang('Reset all')}"</a>
+						<a  class="bt_push" href="#" id="reset_category_filter"><img src="/images/reset_all_button.gif" alt="{vlang('Reset all')}" /></a>
+					</div>
+					<div id="ajax_filtering">
+						<div class="loading"></div>
 					</div>
 				</div>
 			</td>
@@ -88,6 +91,10 @@
 				<td class="tb_h_5">
 					<a href="{$site_url}programmes/id/{$aProgrammeData.com_programme_id}/{flang($aProgrammeData, 'seo_link')}" title="{vlang('View details of programme')} {flang($aProgrammeData, 'title')}">{$price_array = [$aProgrammeData.com_price_from, $aProgrammeData.com_currency_id]}{vlang('Price from per person', $price_array)}</a>
 				</td>
+			</tr>
+			{foreachelse}
+			<tr>
+				<td colspan="5" class="valign_center align_center">{vlang('No programmes found')}</td>
 			</tr>
 			{/foreach}
 		</tbody>

@@ -108,7 +108,69 @@ class Programmes extends Base_Controller
 	{
 		if($this->isAjaxRequest('POST'))
 		{
-			$aProgrammes = $this->programmes_model->get_illnese_joined_with_default_lang($this->config->item('language_abbr'));
+			$this->smarty->assign('COMPLEX_TREATMENT_COSMETIC', COMPLEX_TREATMENT_COSMETIC);
+			$this->smarty->assign('COMPLEX_TREATMENT_MEDICAL', COMPLEX_TREATMENT_MEDICAL);
+			$aIllnesesId = $this->input->post('aIllnesesId');
+			$nCategoryId = $this->input->post('nCategoryId');
+			
+			$this->load->model('categories_model');
+			$aFilters = array(
+				'com_category_id' => $nCategoryId,
+				'com_active' => CATEGORY_ACTIVE,
+			);
+			$bSingle = TRUE;
+			$nLimit = 1;
+			$aCategoryData = $this->categories_model->get_joined_with_default_lang($this->config->item('language_abbr'), $aFilters, $bSingle, $nLimit);
+			if ( ! flang($aCategoryData, 'title') )
+			{
+				$this->not_found();
+			}
+			
+			$this->load->model('illneses_model');
+			$aIllnesesData = $this->illneses_model->get_joined_with_default_lang($this->config->item('language_abbr'), array('com_active' => ILLNESE_ACTIVE), FALSE, FALSE, array('com_order' => 'asc'));
+			$nIllnesesDataCount = count($aIllnesesData);
+			$this->smarty->assign('aIllnesesData', $aIllnesesData);
+			$this->smarty->assign('nIllnesesDataCount', $nIllnesesDataCount);
+			$aIllnesesTitle = array();
+			foreach ($aIllnesesData as $aIllneseData)
+			{
+				$aIllnesesTitle[$aIllneseData['com_illnese_id']] = flang($aIllneseData, 'title');
+			}
+			$this->smarty->assign('aIllnesesTitle', $aIllnesesTitle);
+			
+			$aProgrammesData = $this->programmes_model->get_joined_with_default_lang_by_illneses($aIllnesesId, $this->config->item('language_abbr'), array('com_category_id' => $nCategoryId, 'com_active' => PROGRAMME_ACTIVE), FALSE, NULL, array('com_order' => 'asc'));
+			$this->smarty->assign('aProgrammesData', $aProgrammesData);
+			
+			$aProgrammesIllnesesData = array();
+			foreach ($aProgrammesData as $aProgrammeData)
+			{
+				$aProgrammesIllnesesData[$aProgrammeData['com_programme_id']] = $this->programmes_model->get_illnese_joined_with_default_lang($this->config->item('language_abbr'), array('com_programme_id' => $aProgrammeData['com_programme_id'], 'com_active' => ILLNESE_ACTIVE), FALSE, NULL, array('com_order' => 'asc',));
+			}
+			$this->smarty->assign('aProgrammesIllnesesData', $aProgrammesIllnesesData);
+
+			$this->load->model('cities_model');
+			$aCitiesData = $this->cities_model->get_joined_with_default_lang($this->config->item('language_abbr'), array('com_active' => CITY_ACTIVE), FALSE, FALSE, array('com_order' => 'asc'));
+			$aCitiesTitle = array();
+			foreach ($aCitiesData as $aCityData)
+			{
+				$aCitiesTitle[$aCityData['com_city_id']] = flang($aCityData, 'title');
+			}
+			$this->smarty->assign('aCitiesTitle', $aCitiesTitle);
+
+
+			$this->load->model('spas_model');
+			$aSpasData = $this->spas_model->get_joined_with_default_lang($this->config->item('language_abbr'), array('com_active' => SPA_ACTIVE), FALSE, FALSE, array('com_order' => 'asc'));
+			$aSpasTitle = array();
+			foreach ($aSpasData as $aSpaData)
+			{
+				$aSpasTitle[$aSpaData['com_spa_id']] = flang($aSpaData, 'title');
+			}
+			$this->smarty->assign('aSpasTitle', $aSpasTitle);
+			
+			
+			$this->smarty->assign('aCategoryData', $aCategoryData);
+			
+			$this->view();
 		}
 	}
 }

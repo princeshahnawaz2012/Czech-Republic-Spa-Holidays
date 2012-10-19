@@ -1,23 +1,47 @@
 $(document).ready(function(){
 	$('#category_filter input[type=checkbox]').change(function(){
-		var sIllnese = $(this).next('label').text();
-		var aProgrammes = $('.big_table tbody td.tb_h_2 a');
-		aProgrammes.each(function(nIndex, oDesc){
-			if(!have_illnese(sIllnese, oDesc.text())){
-				
-			}
+		$.scrollTo('#category_filter', 600);
+		var aIllnesesId = Array();
+		var oCheckboxes = $('#category_filter input[type=checkbox]:checked');
+		oCheckboxes.each(function(nIndex, oIllnese){
+			aIllnesesId.push($(oIllnese).val());
+		});
+		var oLoadingIndicator = $('#ajax_filtering');
+		oLoadingIndicator.css('width', $('#category_filter').parent('td').css('width'));
+		oLoadingIndicator.css('height', $('#category_filter').parent('td').css('height'));
+		oLoadingIndicator.show();
+		$.post(site_url + 'programmes/illneses_filter/', {aIllnesesId: aIllnesesId, nCategoryId: nCategoryId}, function(sResponse){
+			$('.big_table tbody').html(sResponse);
+			oLoadingIndicator.hide();
+		}, 'text')
+		.error(function(){
+			oLoadingIndicator.hide();			
 		});
 	});
+	
+	$('#reset_category_filter').click(function(){
+		$.scrollTo('#category_filter', 1000);
+		var oCheckboxes = $('#category_filter input[type=checkbox]:checked');
+		if(oCheckboxes.length == 0){
+			return false;
+		}
+		else{
+			oCheckboxes.each(function(nIndex, oIllnese){
+				$(oIllnese).attr('checked', false);
+			});
+		}
+		var aIllnesesId = Array();
+		var oLoadingIndicator = $('#ajax_filtering');
+		oLoadingIndicator.css('width', $('#category_filter').parent('td').css('width'));
+		oLoadingIndicator.css('height', $('#category_filter').parent('td').css('height'));
+		oLoadingIndicator.show();
+		$.post(site_url + 'programmes/illneses_filter/', {aIllnesesId: aIllnesesId, nCategoryId: nCategoryId}, function(sResponse){
+			$('.big_table tbody').html(sResponse);
+			oLoadingIndicator.hide();
+		}, 'text')
+		.error(function(){
+			oLoadingIndicator.hide();			
+		});
+		return false;
+	});
 });
-
-var have_illnese = function(sIllnese, sDesc){
-	return sDesc.indexOf(sIllnese) + 1;
-}
-
-var hide_tr = function(oDesc){
-	oDesc.parent().parent().hide();
-}
-
-var show_tr = function(oDesc){
-	oDesc.parent().parent().show();
-}

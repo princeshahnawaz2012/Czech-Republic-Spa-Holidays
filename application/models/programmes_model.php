@@ -1134,6 +1134,37 @@ class Programmes_model extends CI_Model
 		$this->db->update($this->table, $aProgrammeData);
 		return $this->db->affected_rows();
 	}
+	
+	
+	public function get_joined_with_default_lang_by_illneses($aIllnesesId, $sLang, $aFilters = false, $bSingle = false, $aLimit = NULL, $aOrder = NULL, $bFilterLike = FALSE)
+	{
+		if ( ! empty($aIllnesesId) )
+		{
+			$this->db->where($this->illnese_sub_join, $aIllnesesId[0]);
+			$this->db->select($this->illnese_join);
+			$aProgrammesData = $this->db->get($this->illnese_table)->result_array();
+			$aProgrammesId = array();
+			foreach ($aProgrammesData as $aData)
+			{
+				$aProgrammesId[] = $aData[$this->illnese_join];
+			}
+			for ($i = 1; $i < count($aIllnesesId); $i++)
+			{
+				$this->db->where($this->illnese_sub_join, $aIllnesesId[$i]);
+				$this->db->select($this->illnese_join);
+				$aProgrammesData = $this->db->get($this->illnese_table)->result_array();
+				$aProgrammesId2 = array();
+				foreach ($aProgrammesData as $aData)
+				{
+					$aProgrammesId2[] = $aData[$this->illnese_join];
+				}
+				$aProgrammesId = array_intersect($aProgrammesId, $aProgrammesId2);
+			}
+			$aProgrammesId[] = 0;
+			$this->db->where_in($this->table_join, $aProgrammesId);
+		}
+		return $this->get_joined_with_default_lang($sLang, $aFilters, $bSingle, $aLimit, $aOrder, $bFilterLike);
+	}
 
 }
 
